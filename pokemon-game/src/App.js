@@ -1,16 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import Layout from './components/Layout/Layout';
+
+import bg from '../src/assets/img/bg.jpg'
 
 function App() {
+
+  const color = 'red';
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hi ZarMarathon!
-        </p>
-      </header>
-    </div>
+      <>
+          <Header title={'Pokemon game'} desc={'This is pokemon game!'} />
+          <Layout title={'Pokemon game'} desc={'This is pokemon game!'} urlBg={bg}/>
+          <Layout title={'Pokemon game'} desc={'This is pokemon game!'} urlBg={null} colorBg={color}/>
+          <Layout title={'Pokemon game'} desc={'This is pokemon game!'} urlBg={bg}/>
+          <Footer />
+      </>
   );
 }
 
