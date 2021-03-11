@@ -7,13 +7,12 @@ import bg from '../src/assets/img/bg.jpg'
 
 function App() {
 
-  const color = 'red';
-
+  const color = '#444C5C';
   return (
       <>
           <Header title={'Pokemon game'} desc={'This is pokemon game!'} />
           <Layout title={'Pokemon game'} desc={'This is pokemon game!'} urlBg={bg}/>
-          <Layout title={'Pokemon game'} desc={'This is pokemon game!'} urlBg={null} colorBg={color}/>
+          <Layout title={'Pokemon game'} desc={'This is pokemon game!'} colorBg={color}/>
           <Layout title={'Pokemon game'} desc={'This is pokemon game!'} urlBg={bg}/>
           <Footer />
       </>

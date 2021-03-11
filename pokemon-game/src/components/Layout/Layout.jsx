@@ -1,7 +1,7 @@
 import s from './layout.module.css';
 
 const Layout = ({title, desc, urlBg, colorBg}) => {
-    const background = urlBg ? {backgroundImage: `url(${urlBg})`} : {background: {colorBg}}
+    const background = urlBg ? {backgroundImage: `url(${urlBg})`} : {backgroundColor: `${colorBg}`}
     
     return (
         <section className={s.root} style={background}>
