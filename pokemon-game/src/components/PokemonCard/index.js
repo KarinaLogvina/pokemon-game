@@ -7,7 +7,7 @@ const PokemonCard = ({name, img, id, type, values}) => {
     const [isAcrive, setActive] = useState(false);
 
     const handleClick = () => {
-      setActive(true)
+        setActive(!isAcrive)
     }
 
     return (
