@@ -27,7 +27,7 @@ function App() {
             colorTitle={color}>
               <div className="flex">
                 {
-                  POKEMON.map(item => <PokemonCard {...item} />)
+                  POKEMON.map((item, index) => <PokemonCard {...item} key={index} />)
                 }
               </div>
           </Layout>
