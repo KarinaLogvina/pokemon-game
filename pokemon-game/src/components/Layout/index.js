@@ -1,10 +1,10 @@
 import s from './layout.module.css';
 
-const Layout = ({title, desc, urlBg, colorBg}) => {
+const Layout = ({ title, urlBg, colorBg, colorTitle, children }) => {
     const style = {};
     if (urlBg) { style.backgroundImage = `url(${urlBg})` }
     if (colorBg) { style.backgroundColor = colorBg }
-    
+
     return (
         <section className={s.root} style={style}>
             <div className={s.wrapper}>
@@ -14,7 +14,7 @@ const Layout = ({title, desc, urlBg, colorBg}) => {
                         <span className={s.separator}></span>
                     </div>
                     <div className={`${s.desc} ${s.full}`}>
-                        <p>{desc}</p>
+                        {children}
                     </div>
                 </article>
             </div>
