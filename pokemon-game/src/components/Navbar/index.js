@@ -12,9 +12,9 @@ const Navbar = ({ isActive, onClickButton }) => {
                 <p className={s.brand}>
                     POKEMON
                 </p>
-                <a onClick={handleClickMenuButton} className={cn(s.menuButton, { [s.active]: isActive })}>
+                <i onClick={handleClickMenuButton} className={cn(s.menuButton, { [s.active]: isActive })}>
                     <span />
-                </a>
+                </i>
             </div>
         </nav>
     )
