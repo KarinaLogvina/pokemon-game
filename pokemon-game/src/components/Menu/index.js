@@ -2,7 +2,6 @@ import cn from 'classnames';
 import s from './menu.module.css'
 
 const Menu = ({ isActive }) => {
-    console.log(isActive)
 
     return (
         <div className={cn(s.menuContainer, { [s.active]: isActive }, { [s.deactive]: !isActive })}>
