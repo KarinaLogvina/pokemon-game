@@ -1,13 +1,15 @@
 import s from './navbar.module.css'
 import cn from 'classnames'
 
-const Navbar = ({ isActive, onClickButton }) => {
+const Navbar = ({ isActive, bgActive = false, onClickButton }) => {
     const handleClickMenuButton = () => {
         onClickButton && onClickButton();
     }
 
     return (
-        <nav className={s.root}>
+        <nav id={s.navbar} className={cn({
+            [s.bgActive]: bgActive
+        }, [s.root])}>
             <div className={s.navWrapper}>
                 <p className={s.brand}>
                     POKEMON

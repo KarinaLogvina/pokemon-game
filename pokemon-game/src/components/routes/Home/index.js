@@ -3,14 +3,16 @@ import Header from '../../Header';
 import Layout from '../../Layout';
 import PokemonCard from '../../PokemonCard';
 import { POKEMON } from '../../../cardsInfo';
+import { useHistory } from 'react-router-dom';
 
 import bg from '../../../assets/img/bg.jpg';
 import s from './home.module.css';
 import MenuHeader from '../../MenuHeader';
 
-function HomePage({ onChangePage }) {
-    const handleClickButton = (page) => {
-        onChangePage && onChangePage(page);
+function HomePage() {
+    const history = useHistory();
+    const handleClickButton = () => {
+        history.push('/game')
     }
 
     const color = '#444C5C';
