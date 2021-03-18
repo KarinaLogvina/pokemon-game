@@ -3,28 +3,32 @@ import cn from 'classnames';
 import HomePage from './components/routes/Home';
 import GamePage from './components/routes/Game';
 import MenuHeader from './components/MenuHeader';
-import Footer from './components/Footer/index'
-import s from './app.module.css'
+import Footer from './components/Footer/index';
+import AboutPage from './components/routes/About';
+import ContactPage from './components/routes/Contact';
+
+import s from './app.module.css';
 
 const App = () => {
-  const match = useRouteMatch('/')
+  const match = useRouteMatch('/');
+  const homeMatch = useRouteMatch('/home');
+
+  const isMatchHomePage = match.isExact || (homeMatch && homeMatch.isExact)
 
   return (
     <Switch>
-      <Route path="/404" render={() => (
-        <h1>404 Not Found</h1>
-      )} />
       <Route>
         <>
-          <MenuHeader bgActive={!match.isExact} />
+          <MenuHeader bgActive={!isMatchHomePage} />
           <div className={cn(s.wrap, {
-            [s.isHomePage]: match.isExact
+            [s.isHomePage]: isMatchHomePage,
           })}>
             <Switch>
               <Route path="/" exact component={HomePage} />
               <Route path="/home" component={HomePage} />
               <Route path="/game" component={GamePage} />
-
+              <Route path="/about" component={AboutPage} />
+              <Route path="/contact" component={ContactPage} />
             </Switch>
           </div>
           <Footer />

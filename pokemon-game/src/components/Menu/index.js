@@ -5,23 +5,23 @@ import { Link } from 'react-router-dom';
 const MENU = [
     {
         title: 'HOME',
-        to: '#welcome'
+        to: '/'
     },
     {
         title: 'GAME',
-        to: '#game'
+        to: '/game'
     },
     {
         title: 'ABOUT',
-        to: '#about'
+        to: '/about'
     },
     {
         title: 'CONTACT',
-        to: '#contact'
+        to: '/contact'
     }
 ]
 
-const Menu = ({ isActive }) => {
+const Menu = ({ isActive, toggleMenu }) => {
 
     return (
         <div className={cn(s.menuContainer, {
@@ -34,13 +34,13 @@ const Menu = ({ isActive }) => {
                     {
                         MENU.map(({ title, to }, index) => (
                             <li key={index}>
-                                <Link to={to}>{title}</Link>
+                                <Link to={to} onClick={toggleMenu}>{title}</Link>
                             </li>
                         ))
                     }
                 </ul>
             </div>
-        </div>
+        </div >
     )
 }
 
