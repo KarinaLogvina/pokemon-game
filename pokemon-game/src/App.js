@@ -13,7 +13,7 @@ const App = () => {
   const match = useRouteMatch('/');
   const homeMatch = useRouteMatch('/home');
 
-  const isMatchHomePage = match.isExact || (homeMatch && homeMatch.isExact)
+  const isMatchHomePage = match.isExact || (homeMatch && homeMatch.isExact);
 
   return (
     <Switch>

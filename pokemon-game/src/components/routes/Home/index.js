@@ -4,7 +4,6 @@ import Layout from '../../Layout';
 import { useHistory } from 'react-router-dom';
 
 import bg from '../../../assets/img/bg.jpg';
-import s from './home.module.css';
 
 function HomePage() {
     const history = useHistory();
