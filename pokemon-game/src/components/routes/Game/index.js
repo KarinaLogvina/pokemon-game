@@ -19,16 +19,28 @@ const GamePage = () => {
     }
 
     const setPokemonActive = (id) => {
-        const newAllPokemons = allPokemons.map(item => item.id === id ? { ...item, isActive: !item.isActive } : item);
-        setAllPokemons(newAllPokemons);
-        writePokemonData(newAllPokemons);
+        return Object.entries(allPokemons).reduce((acc, item) => {
+            const pokemon = { ...item[1] };
+            if (pokemon.id === id) {
+                pokemon.isActive = true;
+            };
+            acc[item[0]] = pokemon;
+            writePokemonData(acc);
+            return acc;
+        }, {});
+    }
+
+    const createPokemon = () => {
+        const keyId = database.ref().child('polemons').push().key;
+        database.ref('pokemons/' + keyId).update({ isActive: !keyId.isActive })
     }
 
     return (
         <>
+            <div><button onClick={createPokemon}>Create new pokemon</button></div>
             <div className={s.flex}>
                 {
-                    allPokemons.map((item, index) => <PokemonCard
+                    Object.entries(allPokemons).map((item, index) => <PokemonCard
                         isActive={item.isActive}
                         setPokemonActive={setPokemonActive}
                         name={item.name}
