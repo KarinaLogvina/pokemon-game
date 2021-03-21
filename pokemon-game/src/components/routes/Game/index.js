@@ -1,28 +1,27 @@
-import { useState } from 'react';
-import firebase from 'firebase/app';
+import { useEffect, useState } from 'react';
 import database from '../../services/firebase';
 
 import PokemonCard from '../../PokemonCard';
-import { POKEMON } from '../../../cardsInfo';
 
 import s from './game.module.css'
 
 const GamePage = () => {
-    const pokemonCopy = JSON.parse(JSON.stringify(POKEMON));
-    const [allPokemons, setAllPokemons] = useState(pokemonCopy);
+    const [allPokemons, setAllPokemons] = useState([]);
 
-    database.ref('pokemons').once('value', (snapshot) => {
-        console.log(snapshot.val());
+    useEffect(() => {
+        database.ref('pokemons').once('value', (snapshot) => {
+            setAllPokemons(snapshot.val())
+        });
     })
 
-    const writePokemonData = () => {
-        console.log(allPokemons)
-        firebase.database().ref('pokemons').set(allPokemons);
+    const writePokemonData = (newAllPokemons) => {
+        database.ref('pokemons').set(newAllPokemons);
     }
 
     const setPokemonActive = (id) => {
-        setAllPokemons(allPokemons => allPokemons.map(item => item.id === id ? { ...item, isActive: !item.isActive } : item));
-        writePokemonData();
+        const newAllPokemons = allPokemons.map(item => item.id === id ? { ...item, isActive: !item.isActive } : item);
+        setAllPokemons(newAllPokemons);
+        writePokemonData(newAllPokemons);
     }
 
     return (
