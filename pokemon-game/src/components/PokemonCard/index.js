@@ -34,7 +34,7 @@ const PokemonCard = ({ name, img, id, type, values, isActive, setPokemonActive }
 
                 <div className={s.cardBack}>
                     <div className={`${s.wrap} ${s.back}`}>
-                        <img src={CardBackSide} alt="Сard Backed" />
+                        <img src={CardBackSide} alt="Сard Backside" />
                     </div>
                 </div>
 
