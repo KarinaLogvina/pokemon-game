@@ -8,6 +8,8 @@ import AboutPage from './components/routes/About';
 import ContactPage from './components/routes/Contact';
 
 import s from './app.module.css';
+import { FirebaseContext } from './components/context/firebaseContext';
+import Firebase from './components/services/firebase';
 
 const App = () => {
   const match = useRouteMatch('/');
@@ -16,28 +18,30 @@ const App = () => {
   const isMatchHomePage = match.isExact || (homeMatch && homeMatch.isExact);
 
   return (
-    <Switch>
-      <Route>
-        <>
-          <MenuHeader bgActive={!isMatchHomePage} />
-          <div className={cn(s.wrap, {
-            [s.isHomePage]: isMatchHomePage,
-          })}>
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/home" component={HomePage} />
-              <Route path="/game" component={GamePage} />
-              <Route path="/about" component={AboutPage} />
-              <Route path="/contact" component={ContactPage} />
-            </Switch>
-          </div>
-          <Footer />
-        </>
-      </Route>
-      <Route render={() => {
-        <Redirect to="/404" />
-      }} />
-    </Switch>
+    <FirebaseContext.Provider value={new Firebase()}>
+      <Switch>
+        <Route>
+          <>
+            <MenuHeader bgActive={!isMatchHomePage} />
+            <div className={cn(s.wrap, {
+              [s.isHomePage]: isMatchHomePage,
+            })}>
+              <Switch>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/home" component={HomePage} />
+                <Route path="/game" component={GamePage} />
+                <Route path="/about" component={AboutPage} />
+                <Route path="/contact" component={ContactPage} />
+              </Switch>
+            </div>
+            <Footer />
+          </>
+        </Route>
+        <Route render={() => {
+          <Redirect to="/404" />
+        }} />
+      </Switch>
+    </FirebaseContext.Provider>
   )
 }
 

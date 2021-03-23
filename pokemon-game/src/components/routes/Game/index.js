@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import database from '../../services/firebase';
+import { useEffect, useState, useContext } from 'react';
 
 import PokemonCard from '../../PokemonCard';
 
 import s from './game.module.css'
+import { FirebaseContext } from '../../context/firebaseContext';
 
 const DATA = {
     "abilities": [
@@ -36,15 +36,12 @@ const DATA = {
 
 const GamePage = () => {
     const [pokemons, setPokemons] = useState([]);
-
-    const getPokemons = () => {
-        database.ref('pokemons').once('value', (snapshot) => {
-            setPokemons(snapshot.val())
-        });
-    }
+    const firebase = useContext(FirebaseContext)
 
     useEffect(() => {
-        getPokemons();
+        firebase.getPokemonSoket((pokemons) => {
+            setPokemons(pokemons)
+        })
     }, [])
 
     const handleChangeActive = (id) => {
@@ -55,7 +52,7 @@ const GamePage = () => {
                     pokemon.active = !pokemon.active
                 }
                 acc[item[0]] = pokemon;
-                database.ref('pokemons/' + item[0]).set(pokemon)
+                firebase.postPokemon(item[0], pokemon)
                 return acc;
             }, {})
         });
@@ -63,8 +60,7 @@ const GamePage = () => {
 
     const handleAddPokemon = () => {
         const data = DATA;
-        const newKey = database.ref().child('pokemons').push().key;
-        database.ref('pokemons/' + newKey).set(data).then(() => getPokemons());
+        firebase.addPokemon(data)
     }
 
     return (
