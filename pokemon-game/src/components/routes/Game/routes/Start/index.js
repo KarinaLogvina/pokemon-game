@@ -53,7 +53,7 @@ const StartPage = () => {
                             key={key}
                             isSelected={selected}
                             setPokemonActive={() => {
-                                if (Object.keys(pokemonContext.pokemons).length < 5 || selected) {
+                                if (Object.keys(pokemonContext.pokemon).length < 5 || selected) {
                                     handleChangeSelected(key)
                                 }
                             }}
@@ -63,7 +63,7 @@ const StartPage = () => {
             <div>
                 <button
                     onClick={handleStartGame}
-                    disabled={Object.keys(pokemonContext.pokemons).length < 5}
+                    disabled={Object.keys(pokemonContext.pokemon).length < 5}
                 >
                     Start</button>
             </div>
