@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import { PokemonContext } from '../../../../context/pokemonContext';
 import PokemonCard from '../../../../PokemonCard';
+import PlayerBoard from './component/PlayerBoard';
 import s from './style.module.css';
 
 const BoardPage = () => {
@@ -54,7 +55,7 @@ const BoardPage = () => {
                         <div
                             key={item.position}
                             className={s.boardPlate}
-                            onClick={() => item.card && handleClickBoardPlate(item.position)}
+                            onClick={() => !item.card && handleClickBoardPlate(item.position)}
                         >
                             {
                                 item.card && <PokemonCard {...item} minimize />
@@ -65,21 +66,7 @@ const BoardPage = () => {
                 }
             </div>
             <div className={s.playerTwo}>
-                {
-                    player2.map(({ id, name, img, minimize, type, values }) => (
-                        <PokemonCard
-                            className={s.card}
-                            isActive={true}
-                            name={name}
-                            id={id}
-                            img={img}
-                            type={type}
-                            values={values}
-                            minimize
-                            isActive
-                        />
-                    ))
-                }
+                <PlayerBoard cards={player2} />
             </div>
         </div>
     );
