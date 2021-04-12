@@ -1,21 +1,36 @@
-import PokemonCard from '../../../../../../PokemonCard/index'
+import { useState } from 'react';
+import PokemonCard from '../../../../../../PokemonCard/index';
+import cn from 'classnames'
 
 import s from './style.module.css'
 
-const PlayerBoard = ({ cards }) => {
+const PlayerBoard = ({ player, cards, onClickCard }) => {
+    const [isSelected, setSelected] = useState(null);
+
+
     return (
         <>
             {
-                cards.map(({ id, name, img, minimize, type, values }) => (
-                    <div className={s.card}>
+                cards.map((item) => (
+                    <div className={cn(s.cardBoard, {
+                        [s.selected]: isSelected === item.id
+                    })}
+                        onClick={() => {
+                            setSelected(item.id);
+                            onClickCard && onClickCard({
+                                player,
+                                ...item,
+                            })
+                        }}
+                    >
                         <PokemonCard
-                            className={s.card}
                             isActive={true}
-                            name={name}
-                            id={id}
-                            img={img}
-                            type={type}
-                            values={values}
+                            key={item.id}
+                            name={item.name}
+                            id={item.id}
+                            img={item.img}
+                            type={item.type}
+                            values={item.values}
                             minimize
                             isActive
                         />

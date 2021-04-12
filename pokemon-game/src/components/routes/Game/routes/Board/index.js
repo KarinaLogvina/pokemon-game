@@ -1,14 +1,22 @@
 import { useContext, useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import { PokemonContext } from '../../../../context/pokemonContext';
-import PokemonCard from '../../../../PokemonCard';
-import PlayerBoard from './component/PlayerBoard';
+import PokemonCard from '../../../../PokemonCard/index';
+import PlayerBoard from '../Board/component/PlayerBoard';
 import s from './style.module.css';
 
 const BoardPage = () => {
-    const [board, setBoard] = useState([]);
-    const [player2, setPlayer2] = useState([])
     const { pokemon } = useContext(PokemonContext);
+
+    const [board, setBoard] = useState([]);
+    const [player1, setPlayer1] = useState(() => {
+        return Object.values(pokemon).map(item => ({
+            ...item,
+            possession: 'blue',
+        }))
+    });
+    const [player2, setPlayer2] = useState();
+    const [choiseCard, setChoiseCard] = useState(null);
 
     // const history = useHistory();
 
@@ -16,8 +24,25 @@ const BoardPage = () => {
     //     history.replace('/game')
     // }
 
-    const handleClickBoardPlate = (position) => {
+    const handleClickBoardPlate = async (position) => {
+        if (choiseCard) {
+            const params = {
+                position,
+                card: choiseCard,
+                board
+            };
 
+            const res = await fetch('https://reactmarathon-api.netlify.app/api/players-turn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(params),
+            });
+
+            const request = await res.json();
+            setBoard(request.data)
+        }
     }
 
     useEffect(async () => {
@@ -27,27 +52,22 @@ const BoardPage = () => {
 
         const player2Response = await fetch('https://reactmarathon-api.netlify.app/api/create-player');
         const player2Request = await player2Response.json();
-        setPlayer2(player2Request.data);
+        setPlayer2(() => {
+            return Object.values(pokemon).data.map(item => ({
+                ...item,
+                possession: 'red',
+            }))
+        });
     }, [])
 
     return (
         <div className={s.root}>
             <div className={s.playerOne}>
-                {
-                    Object.values(pokemon).map(({ id, name, img, minimize, type, values }) => (
-                        <PokemonCard
-                            className={s.card}
-                            isActive={true}
-                            name={name}
-                            id={id}
-                            img={img}
-                            type={type}
-                            values={values}
-                            minimize
-                            isActive
-                        />
-                    ))
-                }
+                <PlayerBoard
+                    player={1}
+                    cards={player1}
+                    onClickCard={(card) => setChoiseCard(card)}
+                />
             </div>
             <div className={s.board}>
                 {
@@ -58,7 +78,7 @@ const BoardPage = () => {
                             onClick={() => !item.card && handleClickBoardPlate(item.position)}
                         >
                             {
-                                item.card && <PokemonCard {...item} minimize />
+                                item.card && <PokemonCard {...item.card} isActive minimize />
                             }
                         </div>
 
@@ -66,7 +86,11 @@ const BoardPage = () => {
                 }
             </div>
             <div className={s.playerTwo}>
-                <PlayerBoard cards={player2} />
+                <PlayerBoard
+                    player={2}
+                    cards={player2}
+                    onClickCard={(card) => setChoiseCard(card)}
+                />
             </div>
         </div>
     );
