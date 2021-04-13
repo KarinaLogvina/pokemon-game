@@ -36,7 +36,7 @@ const GamePage = () => {
             <Switch>
                 <Route path={`${match.path}/`} exact component={StartPage} />
                 <Route path={`${match.path}/board`} component={BoardPage} />
-                <Route path={`${match.path}/finish`} component={FinishPage} />
+                <Route path={`${match.path}/game/finish`} component={FinishPage} />
             </Switch>
         </PokemonContext.Provider>
     );
