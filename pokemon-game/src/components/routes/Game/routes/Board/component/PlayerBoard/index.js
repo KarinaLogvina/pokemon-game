@@ -6,12 +6,12 @@ import s from './style.module.css'
 
 const PlayerBoard = ({ player, cards, onClickCard }) => {
     const [isSelected, setSelected] = useState(null);
-
+    console.log(cards)
 
     return (
         <>
             {
-                cards.map((item) => (
+                Object.entries(cards).map((item) => (
                     <div className={cn(s.cardBoard, {
                         [s.selected]: isSelected === item.id
                     })}
@@ -22,10 +22,10 @@ const PlayerBoard = ({ player, cards, onClickCard }) => {
                                 ...item,
                             })
                         }}
+                        key={item.id}
                     >
                         <PokemonCard
                             isActive={true}
-                            key={item.id}
                             name={item.name}
                             id={item.id}
                             img={item.img}

@@ -10,7 +10,6 @@ import ContactPage from './components/routes/Contact';
 import s from './app.module.css';
 import { FirebaseContext } from './components/context/firebaseContext';
 import Firebase from './components/services/firebase';
-import FinishPage from './components/routes/Game/routes/Finish';
 
 const App = () => {
   const location = useLocation();
@@ -29,7 +28,6 @@ const App = () => {
               <Switch>
                 <Route path="/" exact component={HomePage} />
                 <Route path="/home" component={HomePage} />
-                <Route path="/game/finish" component={FinishPage} />
                 <Route path="/game" component={GamePage} />
                 <Route path="/about" component={AboutPage} />
                 <Route path="/contact" component={ContactPage} />
