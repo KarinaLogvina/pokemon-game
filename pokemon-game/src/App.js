@@ -29,10 +29,10 @@ const App = () => {
               <Switch>
                 <Route path="/" exact component={HomePage} />
                 <Route path="/home" component={HomePage} />
+                <Route path="/game/finish" component={FinishPage} />
                 <Route path="/game" component={GamePage} />
                 <Route path="/about" component={AboutPage} />
                 <Route path="/contact" component={ContactPage} />
-                <Route path="/game/finish" component={FinishPage} />
               </Switch>
             </div>
             <Footer />

@@ -1,10 +1,15 @@
+import { useContext } from 'react';
+
+import { PokemonContext } from '../../../../context/pokemonContext';
 
 
 const FinishPage = () => {
+    const pokemon = useContext(PokemonContext);
+    console.log(pokemon)
+
     return (
         <>
-            <h1>Game is finished</h1>
-            <button>Try again</button>
+            <button>END GAME</button>
         </>
     )
 }

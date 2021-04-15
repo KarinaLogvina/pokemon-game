@@ -13,7 +13,6 @@ const GamePage = () => {
 
     const match = useRouteMatch();
 
-
     const handleSelectedPokemon = (key, pokemon) => {
         setSelectedPokemons(prevState => {
             if (prevState[key]) {
