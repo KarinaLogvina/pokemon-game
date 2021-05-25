@@ -8,10 +8,14 @@ const PlayerBoard = ({ player, cards, onClickCard }) => {
     const [isSelected, setSelected] = useState(null);
     console.log(cards)
 
+    const entries = Object.keys(cards).map((key) => {
+        return cards[key]
+    })
+
     return (
         <>
             {
-                Object.entries(cards).map((item) => (
+                entries.map((item) => (
                     <div className={cn(s.cardBoard, {
                         [s.selected]: isSelected === item.id
                     })}

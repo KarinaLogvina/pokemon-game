@@ -90,7 +90,7 @@ const BoardPage = () => {
         const player2Request = await player2Response.json();
 
         player2Request.data.map((item) => {
-            handleSelectedPokemonPlayer2(item)
+            handleSelectedPokemonPlayer2(item.id, item)
         })
     }, []);
 
